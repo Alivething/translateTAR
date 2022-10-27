@@ -1,5 +1,6 @@
 import cv2
-from cv2 import GaussianBlur
+from frame import TranslateTAR
+TAR = TranslateTAR()
 
 #Video capture
 cap = cv2.VideoCapture('it303.mp4')
@@ -10,19 +11,10 @@ while(cap.isOpened()):
 
     if not ret:
         break
-
-    frame = cv2.cvtColor(ogframe, cv2.COLOR_BGR2HSV)
-    # frame = correct_skew(frame)
-
-    frame = GaussianBlur(frame, (5,5), 0)
     
-    #Edge detection
-    edges = cv2.Canny(frame,50,100)
-    edges = cv2.adaptiveThreshold(edges,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
-            cv2.THRESH_BINARY,11,2)
-    
-    cv2.imshow('Edges', edges)
-    cv2.imshow('Frames', ogframe)
+    ogframe = cv2.flip(ogframe, 0)
+    ogframe = cv2.flip(ogframe, 1)
+    TAR.runOnFrame(ogframe)
 
     k = cv2.waitKey(1) & 0xFF
     if k == 27:
