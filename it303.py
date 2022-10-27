@@ -1,13 +1,8 @@
 import cv2
 from cv2 import GaussianBlur
-from cv2 import dilate
-from cv2 import erode
-from matplotlib import pyplot as plt
-import numpy as np
-from scipy.ndimage import interpolation as inter
 
 #Video capture
-cap = cv2.VideoCapture('translateTAR\it303.mp4')
+cap = cv2.VideoCapture('it303.mp4')
 
 #Extracting frames
 while(cap.isOpened()):
