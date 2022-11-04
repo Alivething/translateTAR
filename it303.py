@@ -25,9 +25,9 @@ while(cap.isOpened()):
     if k == 27:
         break
 
-print(TAR.trans.keys())
-print(TAR.ext.keys())
+print(list(TAR.trans.keys()))
+print(list(TAR.ext.keys()))
 
-print(time() - start)
+# print(time() - start)
 cap.release()
 cv2.destroyAllWindows()

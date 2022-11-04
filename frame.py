@@ -1,5 +1,6 @@
 import pytesseract 
 from googletrans import Translator
+from time import time
 import cv2
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
@@ -20,8 +21,8 @@ class TranslateTAR:
 
         # print(flag)
         if flag > img_bw.size/5000:
-            return 1
-        return 0
+            return True
+        return False
 
     # cv2.imshow("BW", img_bw)
     # cv2.waitKey(0)
@@ -69,8 +70,8 @@ class TranslateTAR:
         text_dict = {}
         frame = img
         
-        # if not self.checkText(img_bw=img_bw):
-        #     return 20
+        if not self.checkText(img_bw=img_bw):
+            return 20
 
         text_dict, frame = self.extractFromImg(img_bw=img_bw, img=img, translate=translate)
 
@@ -82,7 +83,7 @@ class TranslateTAR:
 
             if tr not in self.trans.keys():
                 self.trans[tr] = tr
-            return 20
+            return 60
 
         ex = ""
         for text in text_dict:
@@ -92,8 +93,7 @@ class TranslateTAR:
         return 20
 
 
-
 # TAR = TranslateTAR()
-# img = cv2.imread("TRAIL3.png")
+# img = cv2.imread("TRAIL4.png")
 
 # TAR.runOnFrame(img, translate=True, wait = True)
